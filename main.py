@@ -27,7 +27,7 @@ async def prompt(ctx, *, text: str):
         "max_tokens": 5000,
     }
 
-    ctx.typing()
+    await ctx.send("generating...")
     response = requests.post(f"{url}/v1/completions", json=data, headers={"Content-Type": "application/json"})
     await ctx.send(response.json())
 
@@ -36,9 +36,9 @@ async def set_url(ctx, loc_url: str):
     global url
     if ctx.author.id == 804444072063664148:
         url = loc_url
-        ctx.send("Setting URL to {}".format(url))
+        await ctx.send("Setting URL to {}".format(url))
     else:
-        ctx.send("You are not authorized to use this command.")
+        await ctx.send("You are not authorized to use this command.")
         return
 
 webserver.keep_alive()
