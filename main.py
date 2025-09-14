@@ -29,7 +29,7 @@ async def prompt(ctx, *, text: str):
 
     await ctx.send("generating...")
     response = requests.post(f"{url}/v1/completions", json=data, headers={"Content-Type": "application/json"})
-    await ctx.send(response.json()["choices"][0]["text"])
+    await ctx.send(response.json()["choices"][0]["text"][::999])
 
 @bot.command()
 async def set_url(ctx, loc_url: str):
