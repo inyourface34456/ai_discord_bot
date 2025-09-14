@@ -11,9 +11,12 @@ bot = commands.Bot(command_prefix="!", intents=intents)
 
 
 @bot.event
-async def on_message(message):
-    if message.content.startswith("!"):
-        bot.send_message(message.channel, "hi")
+async def on_ready():
+    print('We have logged in as {0.user}'.format(bot))
+
+@bot.command()
+async def ping(ctx):
+    await ctx.send('pong')
 
 webserver.keep_alive()
 bot.run(DISCORD_TOKEN)
