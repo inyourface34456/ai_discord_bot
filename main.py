@@ -24,12 +24,12 @@ async def ping(ctx):
 async def prompt(ctx, *, text: str):
     data = {
         "prompt": f"{text}",
-        "max_tokens": 5000,
+        "max_tokens": 1000,
     }
 
     await ctx.send("generating...")
     response = requests.post(f"{url}/v1/completions", json=data, headers={"Content-Type": "application/json"})
-    await ctx.send(response.json())
+    await ctx.send(response.json()["choices"][0]["text"])
 
 @bot.command()
 async def set_url(ctx, loc_url: str):
