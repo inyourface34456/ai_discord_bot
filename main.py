@@ -27,6 +27,8 @@ async def prompt(ctx, *, text: str):
     data = {
         "prompt": f"{text}",
         "max_tokens": length,
+        "temperature": 1,
+        "min_p": 0.2,
     }
 
     await ctx.send("generating...")
