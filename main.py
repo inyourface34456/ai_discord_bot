@@ -32,6 +32,7 @@ async def prompt(ctx, *, text: str):
     }
 
     await ctx.send("generating...")
+    await ctx.typing()
     response = await requests_async.post(f"{url}/v1/completions", json=data, headers={"Content-Type": "application/json"}, timeout=180)
     text = response.json()["choices"][0]["text"]
     for chuck in [text[i:i + 2000] for i in range(0, len(text), 2000)]:
