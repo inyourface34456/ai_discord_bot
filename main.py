@@ -27,7 +27,7 @@ async def prompt(ctx, *, text: str):
     }
 
     ctx.typing()
-    response = requests.post(f"https://storm-lowest-gd-receive.trycloudflare.com/v1/completions", json=data, headers={"Content-Type": "application/json"})
+    response = requests.post(f"https://storm-lowest-gd-receive.trycloudflare.com/v1/completions", json=data, headers={"Content-Type": "application/json", "Authorization": "Bearer  password"})
     await ctx.send(response.json())
 
 webserver.keep_alive()
