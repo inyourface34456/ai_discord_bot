@@ -10,6 +10,7 @@ intents = discord.Intents.all()
 # intents.message_content = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
+url = ""
 
 @bot.event
 async def on_ready():
@@ -27,8 +28,18 @@ async def prompt(ctx, *, text: str):
     }
 
     ctx.typing()
-    response = requests.post(f"https://storm-lowest-gd-receive.trycloudflare.com/v1/completions", json=data, headers={"Content-Type": "application/json", "Authorization": "Bearer  password"})
+    response = requests.post(f"{url}/v1/completions", json=data, headers={"Content-Type": "application/json"})
     await ctx.send(response.json())
+
+@bot.command()
+async def set_url(ctx, loc_url: str):
+    global url
+    if ctx.author.id == 804444072063664148:
+        url = loc_url
+        ctx.send("Setting URL to {}".format(url))
+    else:
+        ctx.send("You are not authorized to use this command.")
+        return
 
 webserver.keep_alive()
 bot.run(DISCORD_TOKEN)
